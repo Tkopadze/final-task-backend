@@ -3,7 +3,7 @@ import { createError } from "../services/error.service";
 import { checkToken } from "../services/token.service";
 
 const isAuth: RequestHandler = (req: Request, res: Response, next: NextFunction) => {
-  if (['/auth/signin', '/auth/signup'].includes(req.path) || req.path.substring(0, 7) == '/files/') {
+  if (['/auth/signin', '/auth/signup'].includes(req.path) || req.path.substring(0, 7) == '/files/' ) {
     return next();
   }
   const authHeader = req.header('Authorization');
@@ -14,6 +14,7 @@ const isAuth: RequestHandler = (req: Request, res: Response, next: NextFunction)
     }
   }
   return res.status(403).send(createError(403, 'Invalid token'));
+  //return next();
 }
 
 export default isAuth;
